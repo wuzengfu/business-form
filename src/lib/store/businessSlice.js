@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { businessSchema } from '@/schemas'
+import businessSchema from '@/schemas/businessSchema'
 
 export const businessSlice = createSlice({
   name: 'business',

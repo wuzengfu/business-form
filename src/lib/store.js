@@ -3,6 +3,6 @@ import businessReducer from './store/businessSlice'
 
 export default configureStore({
   reducer: {
-    counter: businessReducer,
+    businessForm: businessReducer,
   },
 })
