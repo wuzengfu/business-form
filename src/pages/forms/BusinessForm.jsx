@@ -24,6 +24,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { ChevronRight } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateBusiness } from '@/lib/store/businessSlice'
+import { incrementStepNum } from '@/lib/store/businessFormStepSlice'
 
 const formSchema = z.object({
   name: z.string().min(1, 'Business name should not be empty!'),
@@ -63,8 +64,7 @@ const BusinessForm = (props) => {
 
   const onSubmit = (values) => {
     dispatch(updateBusiness(values))
-    props.setCurrentStepNum((currentStep) => currentStep + 1)
-    props.setMaxStepNum((maxStepNum) => Math.max(maxStepNum, props.stepNum + 1))
+    dispatch(incrementStepNum())
   }
 
   return (
@@ -233,10 +233,3 @@ const BusinessForm = (props) => {
 }
 
 export default BusinessForm
-
-BusinessForm.propTypes = {
-  maxStepNum: 0,
-  stepNum: 0,
-  setCurrentStepNum: () => {},
-  setMaxStepNum: () => {},
-}
