@@ -19,10 +19,6 @@ export default {
     latitude: '',
     longitude: '',
   },
-  businessHours: {
-    day_name: null,
-    open_time: null,
-    close_time: null,
-  },
+  businessHours: [],
   services: [],
 }
