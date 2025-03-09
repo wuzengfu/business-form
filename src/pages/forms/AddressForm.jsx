@@ -75,7 +75,7 @@ const AddressForm = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Business Information</CardTitle>
+        <CardTitle>Business Address</CardTitle>
       </CardHeader>
       <Form {...form}>
         <form className="space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
