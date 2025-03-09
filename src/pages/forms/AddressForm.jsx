@@ -7,7 +7,14 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
 import { ChevronRight } from 'lucide-react'
 import { z } from 'zod'
 import { useDispatch, useSelector } from 'react-redux'
@@ -23,7 +30,9 @@ const formSchema = z.object({
   building_number: z.string().min(1, 'Building number should not be empty!'),
   street_name: z.string().min(1, 'Street name should not be empty!'),
   unit_number: z.string().min(1, 'Unit number should not be empty!'),
-  postal_code: z.string().regex(new RegExp('^[0-9]{1,6}$'), 'Postal code must be 6 digits'),
+  postal_code: z
+    .string()
+    .regex(new RegExp('^[0-9]{1,6}$'), 'Postal code must be 6 digits'),
   full_address: z.string().min(1, 'Invalid postal code!'),
   latitude: z.string(),
   longitude: z.string(),
@@ -38,7 +47,9 @@ const setFullAddress = async (postalCode, form) => {
       form.setValue('latitude', '')
       form.setValue('longitude', '')
     } else {
-      form.setValue('full_address', fullAddress.results[0].ADDRESS, { shouldValidate: true })
+      form.setValue('full_address', fullAddress.results[0].ADDRESS, {
+        shouldValidate: true,
+      })
       form.setValue('latitude', fullAddress.results[0].LATITUDE)
       form.setValue('longitude', fullAddress.results[0].LONGITUDE)
     }
@@ -131,7 +142,11 @@ const AddressForm = () => {
                   <FormItem>
                     <FormLabel>Postal Code</FormLabel>
                     <FormControl>
-                      <Input placeholder="579799" {...field} onChange={onPostalCodeValueChange(field.onChange)} />
+                      <Input
+                        placeholder="579799"
+                        {...field}
+                        onChange={onPostalCodeValueChange(field.onChange)}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

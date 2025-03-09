@@ -6,7 +6,13 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from '@/components/ui/form'
 import { ChevronRight } from 'lucide-react'
 import { object, z } from 'zod'
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,14 +21,18 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { updateBusinessHours } from '@/lib/store/businessSlice'
 import { incrementStepNum } from '@/lib/store/businessFormStepSlice'
 import TimeSelect from '@/components/businessHoursForm/TimeSelect'
-import businessHoursSchema, { availableDays } from '@/schemas/businessHoursSchema'
+import businessHoursSchema, {
+  availableDays,
+} from '@/schemas/businessHoursSchema'
 
 const formSchema = object({
-  hours: z.object({
-    day_name: z.string(),
-    open_time: z.string().min(1, 'Select an open time!'),
-    close_time: z.string().min(1, 'Select an close time!'),
-  }).array(),
+  hours: z
+    .object({
+      day_name: z.string(),
+      open_time: z.string().min(1, 'Select an open time!'),
+      close_time: z.string().min(1, 'Select an close time!'),
+    })
+    .array(),
 })
 
 const generateDefaultValues = (hoursData) => {
@@ -40,7 +50,6 @@ const generateDefaultValues = (hoursData) => {
   return values
 }
 
-
 const BusinessHoursForm = () => {
   const hoursData = useSelector((state) => state.businessForm.businessHours)
   const dispatch = useDispatch()
@@ -50,9 +59,7 @@ const BusinessHoursForm = () => {
     defaultValues: { hours: generateDefaultValues(hoursData) },
   })
 
-  const {
-    fields,
-  } = useFieldArray({
+  const { fields } = useFieldArray({
     control: form.control,
     name: 'hours',
   })
@@ -70,9 +77,14 @@ const BusinessHoursForm = () => {
       <Form {...form}>
         <form className="space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
           <CardContent className="space-y-5">
-            {fields.map((field, i) =>
-              <Card className="w-full pl-7 pr-7 pt-1 pb-1 flex flex-row items-center justify-between" key={field.id}>
-                <p className="text-lg font-semibold w-32 flex-none inline-block">{field.day_name}</p>
+            {fields.map((field, i) => (
+              <Card
+                className="w-full pl-7 pr-7 pt-1 pb-1 flex flex-row items-center justify-between"
+                key={field.id}
+              >
+                <p className="text-lg font-semibold w-32 flex-none inline-block">
+                  {field.day_name}
+                </p>
                 <div className="flex gap-5">
                   <FormField
                     control={form.control}
@@ -100,7 +112,7 @@ const BusinessHoursForm = () => {
                   />
                 </div>
               </Card>
-            )}
+            ))}
           </CardContent>
           <CardFooter className={'flex justify-end'}>
             <Button type="submit">
