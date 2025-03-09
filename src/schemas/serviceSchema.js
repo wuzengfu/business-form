@@ -1,8 +1,14 @@
 export default {
-  name: null,
-  tags: [],
+  name: '',
+  tags: {
+    level: '',
+    subject: '',
+    stream: '',
+    class_size: '',
+    delivery_mode: '',
+  },
   pricing: {
-    price: null,
+    price: '',
     currency: 'SGD',
     pricing_unit: 'hour',
     variant_name: 'Standard Rate',
