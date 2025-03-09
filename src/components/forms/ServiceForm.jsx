@@ -90,7 +90,7 @@ const ServiceForm = () => {
           }
           dispatch(updateServices(form.getValues().services))
           try {
-            await submitBusinessForm(businessForm)
+            await submitBusinessForm(businessForm, form.getValues().services)
             dispatch(setSuccessModalOpen(true))
           } catch (e) {
             dispatch(setErrorModalOpen(true))

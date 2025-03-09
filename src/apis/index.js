@@ -11,10 +11,10 @@ export const getFullAddress = async (postalCode) => {
   )
 }
 
-export const submitBusinessForm = async (data) => {
-  const services = {
+export const submitBusinessForm = async (data, services) => {
+  const businessData = {
     ...data,
-    services: data.services.map((service) => {
+    services: services.map((service) => {
       return {
         ...service,
         tags: [
@@ -35,7 +35,7 @@ export const submitBusinessForm = async (data) => {
     // Send to backend via POST
     const result = await fetch('http://www.xxxxxx.com', {
       method: 'POST',
-      body: JSON.stringify(services),
+      body: JSON.stringify(businessData),
     })
   } catch (e) {
     console.error(e)
