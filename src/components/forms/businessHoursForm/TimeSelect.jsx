@@ -19,7 +19,9 @@ const generateSelectItems = (from, to) => {
       min = j === 0 ? '00' : '30'
       const value = [hour, min, '00'].join(':')
       const displayValue = [hour, min].join(':')
-      items.push(<SelectItem value={value} children={displayValue} key={`${i}-${j}`} />)
+      items.push(
+        <SelectItem value={value} children={displayValue} key={`${i}-${j}`} />
+      )
     }
   }
   return items
@@ -27,12 +29,16 @@ const generateSelectItems = (from, to) => {
 
 const TimeSelect = (props) => {
   return (
-    <Select className={cn(props.className)}
-            value={props.field.value}
-            defaultValue={props.field.value}
-            onValueChange={props.field.onChange}>
+    <Select
+      className={cn(props.className)}
+      value={props.field.value}
+      defaultValue={props.field.value}
+      onValueChange={props.field.onChange}
+    >
       <SelectTrigger>
-        <SelectValue placeholder={`Select a ${props.isClosingTime ? 'closing' : 'opening'} time`} />
+        <SelectValue
+          placeholder={`Select a ${props.isClosingTime ? 'closing' : 'opening'} time`}
+        />
       </SelectTrigger>
       <SelectContent className={'overflow-y-auto max-h-[15rem]'}>
         <SelectGroup>

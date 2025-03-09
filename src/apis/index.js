@@ -7,23 +7,28 @@ export const getFullAddress = async (postalCode) => {
       headers: {
         Authorization: API_KEY,
       },
-    },
+    }
   )
 }
 
 export const submitBusinessForm = async (data) => {
   const services = {
     ...data,
-    services: data.services.map(service => {
+    services: data.services.map((service) => {
       return {
         ...service,
-        tags: [service.tag.level, service.tag.subject, service.tag.stream, service.tag.class_size, service.tag.delivery_mode],
+        tags: [
+          service.tags.level,
+          service.tags.subject,
+          service.tags.stream,
+          service.tags.class_size,
+          service.tags.delivery_mode,
+        ],
       }
     }),
   }
 
   try {
-    console.log(services)
     await Promise.resolve()
     return
 

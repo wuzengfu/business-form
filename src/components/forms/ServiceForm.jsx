@@ -28,6 +28,10 @@ import StreamSelect from '@/components/forms/businessServicesForm/StreamSelect'
 import ClassSizeSelect from '@/components/forms/businessServicesForm/ClassSizeSelect'
 import DeliveryModeSelect from '@/components/forms/businessServicesForm/DeliveryModeSelect'
 import { submitBusinessForm } from '@/apis'
+import {
+  setErrorModalOpen,
+  setSuccessModalOpen,
+} from '@/lib/store/businessFormModalSlice'
 
 const formSchema = object({
   services: z
@@ -62,7 +66,8 @@ const generateServicesData = (servicesData) => {
 }
 
 const ServiceForm = () => {
-  const servicesData = useSelector((state) => state.businessForm.services)
+  const businessForm = useSelector((state) => state.businessForm)
+  const servicesData = businessForm.services
   const dispatch = useDispatch()
 
   const form = useForm({
@@ -75,17 +80,29 @@ const ServiceForm = () => {
     name: 'services',
   })
 
-  const onSubmit = (form, isSubmitted = false) => async (e) => {
-    await form.handleSubmit(() => {
-      if (isSubmitted) {
-        dispatch(updateServices(form.getValues().services))
-      }
-    }, () => {
-      if (!isSubmitted) {
-        form.clearErrors(`services.${form.getValues().services.length - 1}`)
-      }
-    })(e)
-  }
+  const onSubmit =
+    (form, isSubmitted = false) =>
+    async (e) => {
+      await form.handleSubmit(
+        async () => {
+          if (!isSubmitted) {
+            return
+          }
+          dispatch(updateServices(form.getValues().services))
+          try {
+            await submitBusinessForm(businessForm)
+            dispatch(setSuccessModalOpen(true))
+          } catch (e) {
+            dispatch(setErrorModalOpen(true))
+          }
+        },
+        () => {
+          if (!isSubmitted) {
+            form.clearErrors(`services.${form.getValues().services.length - 1}`)
+          }
+        }
+      )(e)
+    }
 
   return (
     <Card>
@@ -100,7 +117,7 @@ const ServiceForm = () => {
                 <Button
                   className={'absolute top-1 right-2'}
                   variant={'outline'}
-                  size={'icon'}
+                  size={'sm'}
                   onClick={() => remove(i)}
                 >
                   <Trash2 color={'red'} />
@@ -220,7 +237,7 @@ const ServiceForm = () => {
           </CardContent>
           <CardFooter className={'flex justify-end'}>
             <Button type="button" onClick={onSubmit(form, true)}>
-              Next <ChevronRight />
+              Submit <ChevronRight />
             </Button>
           </CardFooter>
         </form>
