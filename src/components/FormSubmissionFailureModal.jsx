@@ -7,6 +7,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { useDispatch, useSelector } from 'react-redux'
@@ -19,7 +20,14 @@ const FormSubmissionFailureModal = () => {
   const dispatch = useDispatch()
 
   return (
-    <Dialog open={isErrorModalOpen} defaultOpen={false}>
+    <Dialog
+      open={isErrorModalOpen}
+      defaultOpen={false}
+      onOpenChange={(open) => {
+        if (open) return
+        dispatch(setErrorModalOpen(false))
+      }}
+    >
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Error</DialogTitle>
@@ -28,13 +36,15 @@ const FormSubmissionFailureModal = () => {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="sm:justify-start">
-          <Button
-            type="button"
-            variant="secondary"
-            onClick={() => dispatch(setErrorModalOpen(false))}
-          >
-            Close
-          </Button>
+          <DialogTrigger asChild>
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => dispatch(setErrorModalOpen(false))}
+            >
+              Close
+            </Button>
+          </DialogTrigger>
         </DialogFooter>
       </DialogContent>
     </Dialog>
