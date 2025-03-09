@@ -5,10 +5,10 @@ import dynamic from 'next/dynamic'
 import { useDispatch, useSelector } from 'react-redux'
 import { setStepNum } from '@/lib/store/businessFormStepSlice'
 
-const BusinessForm = dynamic(() => import('@/pages/forms/BusinessForm'))
-const AddressForm = dynamic(() => import('@/pages/forms/AddressForm'))
-const BusinessHoursForm = dynamic(() => import('@/pages/forms/BusinessHoursForm'))
-const ServiceForm = dynamic(() => import('@/pages/forms/ServiceForm'))
+const BusinessForm = dynamic(() => import('@/components/forms/BusinessForm'))
+const AddressForm = dynamic(() => import('@/components/forms/AddressForm'))
+const BusinessHoursForm = dynamic(() => import('@/components/forms/BusinessHoursForm'))
+const ServiceForm = dynamic(() => import('@/components/forms/ServiceForm'))
 
 const tabs = [
   { title: 'Business Information', component: BusinessForm },

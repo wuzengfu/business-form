@@ -20,7 +20,7 @@ import { useFieldArray, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { updateBusinessHours } from '@/lib/store/businessSlice'
 import { incrementStepNum } from '@/lib/store/businessFormStepSlice'
-import TimeSelect from '@/components/businessHoursForm/TimeSelect'
+import TimeSelect from '@/components/forms/businessHoursForm/TimeSelect'
 import businessHoursSchema, {
   availableDays,
 } from '@/schemas/businessHoursSchema'

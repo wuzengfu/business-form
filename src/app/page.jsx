@@ -1,4 +1,4 @@
-import FormPanel from '@/pages/FormPanel'
+import FormPanel from '@/components/FormPanel'
 
 export default function Home() {
   return (
