@@ -22,7 +22,7 @@ const FormPanel = (props) => {
   const dispatch = useDispatch()
 
   return (
-    <Tabs className={...[props.className, 'lg:w-3/5 md:w-5/6 xs:w-full']}
+    <Tabs className={...[props.className, 'lg:w-3/5 md:w-5/6 xs:w-full overflow-y-auto max-h-screen']}
           value={stepNum.toString()}>
       <TabsList className={`grid w-full grid-cols-4`}>
         {tabs.map((tab, index) =>
