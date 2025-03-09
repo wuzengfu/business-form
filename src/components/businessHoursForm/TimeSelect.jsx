@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import {
   Select,
   SelectContent,
@@ -49,7 +50,13 @@ const TimeSelect = (props) => {
 export default TimeSelect
 
 TimeSelect.propTypes = {
+  className: PropTypes.string,
+  isClosingTime: PropTypes.bool,
+  field: PropTypes.object,
+}
+
+TimeSelect.defaultProps = {
   className: '',
-  isClosingTime: true,
+  isClosingTime: false,
   field: null,
 }
