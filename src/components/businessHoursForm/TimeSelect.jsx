@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { cn } from '@/lib/utils'
 
 const generateSelectItems = (from, to) => {
   const items = []
@@ -26,7 +27,7 @@ const generateSelectItems = (from, to) => {
 
 const TimeSelect = (props) => {
   return (
-    <Select className={...[props.className]}
+    <Select className={cn(props.className)}
             value={props.field.value}
             defaultValue={props.field.value}
             onValueChange={props.field.onChange}>
